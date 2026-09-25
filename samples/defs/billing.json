@@ -1,0 +1,50 @@
+{
+  "name": "billing",
+  "types": [
+    {
+      "name": "ChargeStatus",
+      "kind": "enum",
+      "values": ["ok", "declined", "retry_later"]
+    },
+    {
+      "name": "Money",
+      "kind": "record",
+      "fields": [
+        {"name": "amount", "type": "int"},
+        {"name": "currency", "type": "str", "default": "CNY"}
+      ]
+    },
+    {
+      "name": "ChargeCardRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "order_id", "type": "str"},
+        {"name": "amount", "type": "Money"},
+        {"name": "attempts", "type": "int", "optional": true, "default": 1},
+        {"name": "note", "type": "str", "optional": true},
+        {"name": "tags", "type": "map<str,str>", "optional": true}
+      ]
+    },
+    {
+      "name": "ChargeCardResponse",
+      "kind": "record",
+      "fields": [
+        {"name": "charge_id", "type": "str"},
+        {"name": "status", "type": "ChargeStatus"},
+        {"name": "amount", "type": "Money"}
+      ]
+    },
+    {
+      "name": "GetChargeRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "charge_id", "type": "str"},
+        {"name": "include_events", "type": "bool", "optional": true, "default": false}
+      ]
+    }
+  ],
+  "operations": [
+    {"name": "ChargeCard", "request": "ChargeCardRequest", "response": "ChargeCardResponse"},
+    {"name": "GetCharge", "request": "GetChargeRequest", "response": "ChargeCardResponse"}
+  ]
+}

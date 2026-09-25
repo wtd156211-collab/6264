@@ -1,0 +1,11 @@
+# 改名记录：按路径、字段在前、原名 ASCII 升序
+RENAME|client_events.py|操作|Import|import_
+RENAME|client_events.py|操作|List|list_
+RENAME|model_events.py|字段|card_id|card_id_2
+RENAME|model_events.py|字段|class|class_
+RENAME|model_events.py|字段|from|from_
+RENAME|model_events.py|字段|id|id_
+RENAME|model_events.py|字段|next|next_
+RENAME|model_events.py|字段|type|type_
+RENAME|server_events.py|操作|Import|import_
+RENAME|server_events.py|操作|List|list_

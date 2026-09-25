@@ -1,0 +1,11 @@
+# 生成清单：每个目标文件一行，按路径 ASCII 升序
+FILE|原样保留|client_billing.py|9fc7d7cd2142|charge_card_hooks=-,get_charge_hooks=44eb0d56
+FILE|更新|client_events.py|e18e23a4ee51|import_hooks=4923a165,list_hooks=-
+FILE|新增|client_inventory.py|69186e2c563c|reserve_hooks=-,snapshot_hooks=-
+FILE|原样保留|model_billing.py|3245c9aaa114|charge_card_request_rules=77f11d2f,charge_card_response_rules=-,get_charge_request_rules=-,money_rules=45aa4483
+FILE|更新|model_events.py|3253e33bc8db|event_rules=e3f4a691,import_request_rules=-,import_response_rules=-,list_request_rules=-,list_response_rules=-
+FILE|新增|model_inventory.py|e09b7ef7849f|reserve_request_rules=-,reserve_response_rules=-,sku_rules=-,snapshot_request_rules=-,snapshot_response_rules=-,stock_line_rules=-,warehouse_rules=-
+FILE|更新|server_billing.py|9fc7d7cd2142|charge_card_impl=41921684,get_charge_impl=-,server_setup=-
+FILE|新增|server_events.py|e18e23a4ee51|import_impl=-,list_impl=-,server_setup=-
+FILE|更新|server_inventory.py|69186e2c563c|reserve_impl=-,server_setup=-,snapshot_impl=-
+TOTAL|新增=3|更新=4|原样保留=2

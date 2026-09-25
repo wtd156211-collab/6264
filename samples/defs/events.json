@@ -1,0 +1,60 @@
+{
+  "name": "events",
+  "types": [
+    {
+      "name": "EventKind",
+      "kind": "enum",
+      "values": ["created", "updated", "deleted"]
+    },
+    {
+      "name": "Event",
+      "kind": "record",
+      "fields": [
+        {"name": "id", "type": "str"},
+        {"name": "class", "type": "str"},
+        {"name": "type", "type": "str"},
+        {"name": "from", "type": "str", "optional": true},
+        {"name": "card-id", "type": "str", "optional": true},
+        {"name": "card_id", "type": "str", "optional": true},
+        {"name": "kind", "type": "EventKind"},
+        {"name": "retry_count", "type": "int", "default": 0}
+      ]
+    },
+    {
+      "name": "ImportRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "events", "type": "list<Event>"},
+        {"name": "dry_run", "type": "bool", "default": false}
+      ]
+    },
+    {
+      "name": "ImportResponse",
+      "kind": "record",
+      "fields": [
+        {"name": "accepted", "type": "int"},
+        {"name": "rejected", "type": "list<str>", "optional": true}
+      ]
+    },
+    {
+      "name": "ListRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "limit", "type": "int", "default": 20},
+        {"name": "cursor", "type": "str", "optional": true}
+      ]
+    },
+    {
+      "name": "ListResponse",
+      "kind": "record",
+      "fields": [
+        {"name": "items", "type": "list<Event>"},
+        {"name": "next", "type": "str", "optional": true}
+      ]
+    }
+  ],
+  "operations": [
+    {"name": "Import", "request": "ImportRequest", "response": "ImportResponse"},
+    {"name": "List", "request": "ListRequest", "response": "ListResponse"}
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "inventory",
+  "types": [
+    {
+      "name": "StockStatus",
+      "kind": "enum",
+      "values": ["in_stock", "low", "out_of_stock", "discontinued"]
+    },
+    {
+      "name": "Sku",
+      "kind": "record",
+      "fields": [
+        {"name": "sku_id", "type": "str"},
+        {"name": "title", "type": "str"},
+        {"name": "status", "type": "StockStatus"},
+        {"name": "weight_g", "type": "int", "optional": true},
+        {"name": "barcode", "type": "str", "optional": true}
+      ]
+    },
+    {
+      "name": "Warehouse",
+      "kind": "record",
+      "fields": [
+        {"name": "code", "type": "str"},
+        {"name": "region", "type": "str"},
+        {"name": "capacity", "type": "int"},
+        {"name": "paused", "type": "bool", "default": false},
+        {"name": "labels", "type": "map<str,str>", "optional": true}
+      ]
+    },
+    {
+      "name": "StockLine",
+      "kind": "record",
+      "fields": [
+        {"name": "sku", "type": "Sku"},
+        {"name": "warehouse", "type": "Warehouse"},
+        {"name": "on_hand", "type": "int"},
+        {"name": "reserved", "type": "int", "default": 0},
+        {"name": "reorder_at", "type": "int", "optional": true}
+      ]
+    },
+    {
+      "name": "ReserveRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "lines", "type": "list<StockLine>"},
+        {"name": "order_id", "type": "str"},
+        {"name": "ttl_seconds", "type": "int", "default": 900},
+        {"name": "dry_run", "type": "bool", "default": false}
+      ]
+    },
+    {
+      "name": "ReserveResponse",
+      "kind": "record",
+      "fields": [
+        {"name": "reserved", "type": "list<str>"},
+        {"name": "missing", "type": "list<str>", "optional": true},
+        {"name": "expires_at", "type": "int", "optional": true}
+      ]
+    },
+    {
+      "name": "SnapshotRequest",
+      "kind": "record",
+      "fields": [
+        {"name": "warehouse", "type": "str"},
+        {"name": "include_paused", "type": "bool", "default": false}
+      ]
+    },
+    {
+      "name": "SnapshotResponse",
+      "kind": "record",
+      "fields": [
+        {"name": "lines", "type": "list<StockLine>"},
+        {"name": "taken_at", "type": "int"}
+      ]
+    }
+  ],
+  "operations": [
+    {"name": "Reserve", "request": "ReserveRequest", "response": "ReserveResponse"},
+    {"name": "Snapshot", "request": "SnapshotRequest", "response": "SnapshotResponse"}
+  ]
+}
